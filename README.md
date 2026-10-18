@@ -1,66 +1,95 @@
 # Library System API
 
-A simple library management system built with **Python** and **FastAPI**.
-
-This project was created as a learning project to practice building REST APIs. It allows users to add, view, update, and delete books.
+A simple Library System API built with Python and FastAPI. This project allows users to manage books through HTTP requests.
 
 ## Features
 
-- Get a list of all books
-- Add a new book
-- Get a specific book by ID
-- Update book information using PATCH
-- Delete a book by ID
-- Prevent duplicate book IDs
-- Handle errors for books that do not exist
+- **Get all books:** Retrieve all books stored in the system.
+- **Add a book:** Add a new book with an ID, title, and author.
+- **Get a book:** Retrieve a specific book using its ID.
+- **Update a book:** Update the title or author of an existing book.
+- **Delete a book:** Remove a book from the system.
+- **Duplicate ID validation:** Prevent adding books with an existing ID.
+- **Error handling:** Return appropriate error messages when a book is not found.
 
 ## Technologies Used
 
 - Python
 - FastAPI
 - Pydantic
+- Uvicorn
 
 ## Data Storage
 
-This project does not use a database. Book information is stored in a Python list in memory.
+Books are stored in a Python dictionary in memory. Each book's ID is used as the dictionary key, and its title and author are stored as the value.
 
-**Note:** Book data is lost when the application stops or restarts.
+**Note:** This project does not use a database. All book data is lost when the application stops or restarts.
 
 ## Installation
 
-1. Clone or download this repository.
-2. Open a terminal in the project directory.
-3. Create and activate a virtual environment if needed.
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/setarehvalaei/library-system-api.git
+   ```
+
+2. Navigate to the project directory:
+
+   ```bash
+   cd library-system-api
+   ```
+
+3. Create and activate a virtual environment (optional but recommended).
+
 4. Install the required packages:
 
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+## Running the Application
+
+Run the following command:
+
 ```bash
-pip install -r requirements.txt
+uvicorn Library_System:app --reload
 ```
 
-## Run the Application
+The API will be available at:
 
-Start the development server:
+`http://127.0.0.1:8000`
 
-```bash
-python -m fastapi dev Library_System.py
-```
+## API Documentation
+
+FastAPI automatically generates interactive API documentation. After starting the application, open:
+
+`http://127.0.0.1:8000/docs`
+
+You can use this page to test all endpoints.
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
+| GET | `/` | Welcome message |
 | GET | `/books` | Get all books |
 | POST | `/books` | Add a new book |
 | GET | `/books/{book_id}` | Get a book by ID |
 | PATCH | `/books/{book_id}` | Update a book |
 | DELETE | `/books/{book_id}` | Delete a book |
 
-## API Documentation
+## Example Request
 
-After starting the server, open the interactive API documentation:
+To add a book, send a `POST` request to `/books` with the following JSON body:
 
-http://127.0.0.1:8000/docs
+```json
+{
+  "id": 1,
+  "title": "Python Basics",
+  "author": "Ali"
+}
+```
 
-## Purpose
+## Learning Goals
 
-The purpose of this project is to practice Python, FastAPI, HTTP methods, request validation, and basic error handling.
+This project was created to practice building REST APIs with FastAPI, using Pydantic models, handling HTTP errors, and managing data with Python dictionaries.
